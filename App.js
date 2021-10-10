@@ -20,7 +20,6 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-
         <SafeAreaProvider>
 
           <Stack.Navigator>
@@ -38,7 +37,6 @@ export default function App() {
           </Stack.Navigator>
 
         </SafeAreaProvider>
-
       </NavigationContainer>
     </Provider>
   );
