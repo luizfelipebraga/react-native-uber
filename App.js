@@ -4,10 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 //react-redux
 import { store } from './src/store.js';
 import { Provider } from 'react-redux';
- 
+
 //pages
 import { HomeScreen } from './src/screens/HomeScreen.js';
 import { MapScreen } from './src/screens/MapScreen';
+import { EatScreen } from './src/screens/EatScreen.js';
 
 //navigator
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -30,8 +31,14 @@ export default function App() {
               }} />
 
             <Stack.Screen
-              name="EatsScreen"
+              name="MapScreen"
               component={MapScreen} options={{
+                headerShown: false,
+              }} />
+
+            <Stack.Screen
+              name="EatScreen"
+              component={EatScreen} options={{
                 headerShown: false,
               }} />
           </Stack.Navigator>

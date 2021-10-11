@@ -4,8 +4,13 @@ import tw from 'tailwind-react-native-classnames';
 import { NavOptions } from '../components/NavOptions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_API_KEY } from "@env";
+import { useDispatch } from 'react-redux';
+import { setDestination, setOrigin, setTravelTime } from '../slices/navSlice';
 
 export const HomeScreen = () => {
+
+    const dispatch = useDispatch();
+
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View style={styles.container}>
@@ -15,27 +20,36 @@ export const HomeScreen = () => {
                 />
 
                 <GooglePlacesAutocomplete
-                    placeholder="Where from?"
+                    placeholder="Destino?"
                     styles={{
                         container: {
                             flex: 0,
                         },
                         textInput: {
+                            height: 50,
                             fontSize: 18,
+                            backgroundColor: '#eee',
+                            marginVertical: 5
                         },
                     }}
                     onPress={(data, details = null) => {
-                        console.log(data)
-                        console.log(details)
+                        dispatch(setOrigin({
+                            location: details.geometry.location,
+                            description: data.description
+                        }))
+
+                        dispatch(setDestination(null))
                     }}
+                    fetchDetails={true}
+                    returnKeyType={"search"}
                     enablePoweredByContainer={false}
                     minLength={2}
-                    query={{
-                        key: GOOGLE_MAPS_API_KEY,
-                        language: "en",
-                    }}
                     nearbyPlacesAPI="GooglePlacesSearch"
                     debounce={400}
+                    query={{
+                        key: GOOGLE_MAPS_API_KEY,
+                        language: 'en',
+                    }}
                 />
 
                 <NavOptions />
@@ -46,6 +60,7 @@ export const HomeScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
+        height: '100%',
         padding: 15
     }
 })

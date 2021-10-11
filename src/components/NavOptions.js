@@ -9,16 +9,16 @@ const data = [
 
     {
         id: "123",
-        title: "Get a ride",
+        title: "Uber",
         image: "https://links.papareact.com/3pn",
         screen: "MapScreen",
     },
 
     {
         id: "456",
-        title: "Order food",
+        title: "Uber Eats",
         image: "https://links.papareact.com/28w",
-        screen: "EatsScreen",
+        screen: "EatScreen",
     },
 ]
 
@@ -32,7 +32,7 @@ export const NavOptions = () => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
                 <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
+                    style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40 h-60`}
                     onPress={() => navigation.navigate(item.screen)}
                 >
                     <View>
