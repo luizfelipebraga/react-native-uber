@@ -20,7 +20,11 @@ export const HomeScreen = () => {
                 />
 
                 <GooglePlacesAutocomplete
-                    placeholder="Destino?"
+                    placeholder='Origin'
+                    fetchDetails={true}
+                    enablePoweredByContainer={false}
+                    minLength={2}
+                    nearbyPlacesAPI="GooglePlacesSearch"
                     styles={{
                         container: {
                             flex: 0,
@@ -29,7 +33,8 @@ export const HomeScreen = () => {
                             height: 50,
                             fontSize: 18,
                             backgroundColor: '#eee',
-                            marginVertical: 5
+                            marginVertical: 5,
+                            marginHorizontal: 10,
                         },
                     }}
                     onPress={(data, details = null) => {
@@ -40,14 +45,8 @@ export const HomeScreen = () => {
 
                         dispatch(setDestination(null))
                     }}
-                    fetchDetails={true}
-                    returnKeyType={"search"}
-                    enablePoweredByContainer={false}
-                    minLength={2}
-                    nearbyPlacesAPI="GooglePlacesSearch"
-                    debounce={400}
                     query={{
-                        key: GOOGLE_MAPS_API_KEY,
+                        key: 'AIzaSyAbf9ovjbl5rXIh_Jzo1Loh18aaCVtlKwE',
                         language: 'en',
                     }}
                 />
