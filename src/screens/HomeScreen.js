@@ -3,9 +3,9 @@ import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native'
 import tw from 'tailwind-react-native-classnames';
 import { NavOptions } from '../components/NavOptions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GOOGLE_MAPS_API_KEY } from "@env";
+import { CONFIG } from '../../config/index';
 import { useDispatch } from 'react-redux';
-import { setDestination, setOrigin, setTravelTime } from '../slices/navSlice';
+import { setDestination, setOrigin } from '../slices/navSlice';
 
 export const HomeScreen = () => {
 
@@ -19,37 +19,41 @@ export const HomeScreen = () => {
                     source={{ uri: "https://links.papareact.com/gzs", }}
                 />
 
-                <GooglePlacesAutocomplete
-                    placeholder='Origin'
-                    fetchDetails={true}
-                    enablePoweredByContainer={false}
-                    minLength={2}
-                    nearbyPlacesAPI="GooglePlacesSearch"
-                    styles={{
-                        container: {
-                            flex: 0,
-                        },
-                        textInput: {
-                            height: 50,
-                            fontSize: 18,
-                            backgroundColor: '#eee',
-                            marginVertical: 5,
-                            marginHorizontal: 10,
-                        },
-                    }}
-                    onPress={(data, details = null) => {
-                        dispatch(setOrigin({
-                            location: details.geometry.location,
-                            description: data.description
-                        }))
+                <View>
+                    <GooglePlacesAutocomplete
+                        placeholder='Origin'
+                        fetchDetails={true}
+                        enablePoweredByContainer={false}
+                        minLength={2}
+                        nearbyPlacesAPI="GooglePlacesSearch"
+                        styles={{
+                            container: {
+                                flex: 0,
+                            },
+                            textInput: {
+                                height: 50,
+                                fontSize: 18,
+                                backgroundColor: '#eee',
+                                marginVertical: 5,
+                                marginHorizontal: 10,
+                            },
+                        }}
+                        onPress={(data, details) => {
+                            console.log(data, details)
+                            dispatch(setOrigin({
+                                location: details.geometry.location,
+                                description: data.description
+                            }))
 
-                        dispatch(setDestination(null))
-                    }}
-                    query={{
-                        key: GOOGLE_MAPS_API_KEY,
-                        language: 'en',
-                    }}
-                />
+                            dispatch(setDestination(null))
+                        }}
+                        query={{
+                            key: CONFIG.GOOGLE_KEY,
+                            language: 'en',
+                        }}
+                    />
+                </View>
+
 
                 <NavOptions />
             </View>
