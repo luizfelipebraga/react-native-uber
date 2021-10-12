@@ -46,7 +46,7 @@ export const HomeScreen = () => {
                         dispatch(setDestination(null))
                     }}
                     query={{
-                        key: 'AIzaSyAbf9ovjbl5rXIh_Jzo1Loh18aaCVtlKwE',
+                        key: GOOGLE_MAPS_API_KEY,
                         language: 'en',
                     }}
                 />
