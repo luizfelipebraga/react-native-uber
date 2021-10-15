@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 
 //react-redux
 import { store } from './src/store.js';
@@ -23,15 +23,21 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <SafeAreaProvider>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}
+          >
 
-          <Stack.Navigator>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+            <Stack.Navigator>
+              <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
 
-            <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
 
-            <Stack.Screen name="EatScreen" component={EatScreen} options={{ headerShown: false }} />
-          </Stack.Navigator>
+              <Stack.Screen name="EatScreen" component={EatScreen} options={{ headerShown: false }} />
+            </Stack.Navigator>
 
+          </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>
